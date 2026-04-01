@@ -860,35 +860,40 @@ async function fetchPrices() {
   try {
     var controller = new AbortController();
     var timer = setTimeout(function() { controller.abort(); }, 10000);
-    var res = await fetch(SWAPI_URL, { signal: controller.signal });
+
+    var res = await fetch("/.netlify/functions/steam-prices", {
+      signal: controller.signal
+    });
+
     clearTimeout(timer);
+
     if (!res.ok) throw new Error('HTTP ' + res.status);
+
     var items = await res.json();
 
-    // Build a lookup map from the response
     var lookup = {};
     items.forEach(function(item) {
-      if (item.markethashname) {
-        lookup[item.markethashname] = item.pricelatest || item.priceavg || item.pricemin || null;
+      if (item.market_hash_name) {
+        lookup[item.market_hash_name] =
+          item.price_mix ?? item.price_real ?? item.price_latest_sell ?? null;
       }
     });
 
-    // Update all skin prices
     Object.keys(skinMap).forEach(function(name) {
       var price = lookup[name] || null;
       setPrice(skinMap[name], price);
     });
 
-  } catch(e) {
-    // On failure show dash — don't leave spinning
+  } catch (e) {
     Object.values(skinMap).forEach(function(ids) {
       setPrice(ids, null);
     });
+
     console.warn('SteamWebAPI price fetch failed:', e.message);
   }
 }
 
-// Run immediately then refresh every 5 minutes
+// Run immediately; refresh every 5 minutes
 fetchPrices();
 setInterval(fetchPrices, 5 * 60 * 1000);
 </script>
