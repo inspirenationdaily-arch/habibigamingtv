@@ -35,7 +35,7 @@ exports.handler = async function () {
       results.push({
         market_hash_name: data.markethashname || skin,
         market_name: data.marketname || skin,
-        price_latest_sell: data.pricelatestsell ?? null,
+        price_latest: data.pricelatest ?? null,
         price_real: data.pricereal ?? null,
         price_mix: data.pricemix ?? null,
         image: data.itemimage || null,
