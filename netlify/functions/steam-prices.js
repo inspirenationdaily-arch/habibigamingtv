@@ -1,26 +1,25 @@
-exports.handler = async function () {
-  const apiKey = process.env.STEAMWEBAPI_KEY;
+const skins = [
+  "AK-47 | Head Shot (Factory New)",
+  "AK-47 | Orbit Mk01 (Minimal Wear)",
+  "Desert Eagle | Blaze (Factory New)",
+  "AWP | Asiimov (Field-Tested)"
+];
 
+const results = [];
+
+for (const skin of skins) {
   const url =
-    "https://www.steamwebapi.com/steam/api/items" +
+    "https://www.steamwebapi.com/steam/api/item" +
     "?key=" + encodeURIComponent(apiKey) +
-    "&game=cs2";
+    "&market_hash_name=" + encodeURIComponent(skin);
 
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
 
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data.slice(0, 20)) // limit returned data
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message })
-    };
-  }
+  results.push(data);
+}
+
+return {
+  statusCode: 200,
+  body: JSON.stringify(results)
 };
