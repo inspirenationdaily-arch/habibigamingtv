@@ -878,12 +878,7 @@ async function fetchPrices() {
           item.price_mix ?? item.price_real ?? item.price_latest_sell ?? null;
       }
     });
-var skinMap = {
-  "AK-47 | Head Shot (Factory New)": ["p0", "t0", "t0b"],
-  "AK-47 | Orbit Mk01 (Minimal Wear)": ["p1", "t1", "t1b"],
-  "Desert Eagle | Blaze (Factory New)": ["p2", "t2", "t2b"],
-  "AWP | Asiimov (Field-Tested)": ["p3", "t3", "t3b"]
-};
+
     Object.keys(skinMap).forEach(function(name) {
       var price = lookup[name] || null;
       setPrice(skinMap[name], price);
