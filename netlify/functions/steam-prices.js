@@ -2,10 +2,16 @@ exports.handler = async function () {
   const apiKey = process.env.STEAMWEBAPI_KEY;
 
   const skins = [
-    "AK-47 | Head Shot (Factory New)",
-    "AK-47 | Orbit Mk01 (Minimal Wear)",
-    "Desert Eagle | Blaze (Factory New)",
-    "AWP | Asiimov (Field-Tested)"
+    "AWP | Dragon Lore (Field-Tested)",
+    "AK-47 | Fire Serpent (Field-Tested)",
+    "M4A4 | Howl (Field-Tested)",
+    "AK-47 | Wild Lotus (Factory New)",
+    "AWP | Gungnir (Factory New)",
+    "AK-47 | Case Hardened (Factory New)",
+    "Glock-18 | Fade (Factory New)",
+    "M4A1-S | Knight (Factory New)",
+    "AWP | Medusa (Factory New)",
+    "AK-47 | Bloodsport (Factory New)"
   ];
 
   try {
