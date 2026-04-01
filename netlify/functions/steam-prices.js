@@ -1,25 +1,57 @@
-const skins = [
-  "AK-47 | Head Shot (Factory New)",
-  "AK-47 | Orbit Mk01 (Minimal Wear)",
-  "Desert Eagle | Blaze (Factory New)",
-  "AWP | Asiimov (Field-Tested)"
-];
+exports.handler = async function () {
+  const apiKey = process.env.STEAMWEBAPI_KEY;
 
-const results = [];
+  // Keep this small on Starter plan.
+  const skins = [
+    "AK-47 | Head Shot (Factory New)",
+    "AK-47 | Orbit Mk01 (Minimal Wear)",
+    "Desert Eagle | Blaze (Factory New)",
+    "AWP | Asiimov (Field-Tested)"
+  ];
 
-for (const skin of skins) {
-  const url =
-    "https://www.steamwebapi.com/steam/api/item" +
-    "?key=" + encodeURIComponent(apiKey) +
-    "&market_hash_name=" + encodeURIComponent(skin);
+  try {
+    const results = [];
 
-  const response = await fetch(url);
-  const data = await response.json();
+    for (const skin of skins) {
+      const url =
+        "https://www.steamwebapi.com/steam/api/item" +
+        "?key=" + encodeURIComponent(apiKey) +
+        "&game=cs2" +
+        "&market_hash_name=" + encodeURIComponent(skin);
 
-  results.push(data);
-}
+      const response = await fetch(url);
+      const data = await response.json();
 
-return {
-  statusCode: 200,
-  body: JSON.stringify(results)
+      results.push({
+        market_hash_name: data.markethashname || skin,
+        market_name: data.marketname || skin,
+        price_latest_sell: data.pricelatestsell ?? null,
+        price_real: data.pricereal ?? null,
+        price_mix: data.pricemix ?? null,
+        image: data.itemimage || null,
+        unstable: data.unstable ?? false
+      });
+    }
+
+    return {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=55, s-maxage=55"
+      },
+      body: JSON.stringify(results)
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-store"
+      },
+      body: JSON.stringify({
+        error: "Failed to fetch item prices",
+        details: error.message
+      })
+    };
+  }
 };
