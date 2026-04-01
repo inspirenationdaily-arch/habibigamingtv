@@ -22,7 +22,7 @@ exports.handler = async function () {
         "https://www.steamwebapi.com/steam/api/item" +
         "?key=" + encodeURIComponent(apiKey) +
         "&game=cs2" +
-        "&markethashname=" + encodeURIComponent(name);
+       "&market_hash_name=" + encodeURIComponent(name);
 
       const response = await fetch(url);
       const data = await response.json();
