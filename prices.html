@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live CS2 Skin Prices | HabibiGamingTV</title>
+<meta name="description" content="Real-time Steam Market prices for the top CS2 skins in 2026. Updated every few minutes directly from Steam.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#05080d;color:#dde2ec;font-family:'Syne',sans-serif;overflow-x:hidden;}
+:root{--fire:#ff5c00;--gold:#ffad33;--bg:#05080d;--bg2:#07090f;--bg3:#090d14;--border:rgba(255,255,255,0.06);--fh:'Barlow Condensed',sans-serif;--fm:'JetBrains Mono',monospace;}
+a{text-decoration:none;}
+.orb{position:fixed;border-radius:50%;filter:blur(150px);pointer-events:none;z-index:0}
+.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(255,92,0,0.08),transparent 70%);top:-200px;left:-150px;animation:oa 22s ease-in-out infinite alternate}
+.o2{width:400px;height:400px;background:radial-gradient(circle,rgba(255,173,51,0.05),transparent 70%);bottom:-100px;right:-100px;animation:ob 28s ease-in-out infinite alternate}
+@keyframes oa{to{transform:translate(80px,100px)}}
+@keyframes ob{to{transform:translate(-60px,-60px)}}
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--border);background:rgba(5,8,13,0.95);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+.nav-logo{font-family:var(--fh);font-size:22px;font-weight:900;letter-spacing:0.06em;text-transform:uppercase;background:linear-gradient(110deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-family:var(--fm);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#5a6478;transition:color 0.2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--fire);}
+.page-hero{padding:80px 40px 60px;position:relative;z-index:1;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(255,92,0,0.03) 0%,transparent 100%);}
+.page-tag{font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--fire);display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;}
+.page-tag::before{content:'';display:block;width:24px;height:1px;background:var(--fire)}
+.page-title{font-family:var(--fh);font-size:clamp(42px,7vw,88px);font-weight:900;line-height:0.9;letter-spacing:0.01em;text-transform:uppercase;margin-bottom:20px;}
+.page-title span{background:linear-gradient(110deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.page-sub{font-size:15px;color:#5a6478;line-height:1.75;max-width:560px;}
+.content{padding:60px 40px;position:relative;z-index:1;max-width:1200px;margin:0 auto;}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:16px;position:relative;overflow:hidden;transition:border-color 0.25s,transform 0.2s;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--fire),var(--gold),transparent);opacity:0;transition:opacity 0.25s;}
+.card:hover{border-color:rgba(255,92,0,0.35);transform:translateY(-2px);}
+.card:hover::before{opacity:1;}
+.card-label{font-family:var(--fm);font-size:8px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--fire);margin-bottom:8px;display:block;}
+.card-title{font-family:var(--fh);font-size:24px;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;color:#dde2ec;margin-bottom:8px;}
+.card-body{font-size:13px;color:#5a6478;line-height:1.75;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.badge{display:inline-block;font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 12px;border-radius:4px;margin-bottom:12px;}
+.badge-fire{background:linear-gradient(90deg,var(--fire),var(--gold));color:#000;}
+.badge-red{background:#eb4b4b;color:#fff;}
+.badge-purple{background:#d32ce6;color:#fff;}
+.badge-blue{background:#4b69ff;color:#fff;}
+.badge-gold{background:#e4ae39;color:#000;}
+.price-tag{font-family:var(--fh);font-size:28px;font-weight:900;background:linear-gradient(90deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.back-link{font-family:var(--fm);font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--fire);display:inline-flex;align-items:center;gap:8px;margin-bottom:40px;opacity:0.7;transition:opacity 0.2s;}
+.back-link:hover{opacity:1;}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 40px;margin-top:80px;}
+.footer-copy{font-family:var(--fm);font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#3a4155;}
+@media(max-width:768px){nav{padding:16px 24px;}.nav-links{display:none;}.page-hero{padding:48px 24px 40px;}.content{padding:40px 24px;}.grid-2,.grid-3{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<nav>
+  <a href="index.html" class="nav-logo">HabibiGamingTV</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="prices.html">Prices</a>
+    <a href="guides.html">Guides</a>
+    <a href="budget.html">Budget</a>
+    <a href="tiers.html">Tiers</a>
+    <a href="releases.html">Releases</a>
+  </div>
+</nav>
+<div class="page-hero">
+  <div class="page-tag">Live Data</div>
+  <h1 class="page-title"><span>Live</span> Market Prices</h1>
+  <p class="page-sub">Real-time Steam Market prices for the top CS2 skins in 2026. Updated every few minutes directly from Steam.</p>
+</div>
+<div class="content">
+  <a class="back-link" href="index.html">← Back to Home</a>
+  
+<div class="grid-2">
+  <div class="card"><span class="badge badge-gold">Contraband</span><div class="card-title">AWP | Dragon Lore FT</div><div class="card-body">The crown jewel of CS2. Coveted for its intricate dragon artwork and legendary status in the community.</div><div class="price-tag" id="pp0">Loading…</div></div>
+  <div class="card"><span class="badge badge-red">Covert</span><div class="card-title">AK-47 | Fire Serpent FT</div><div class="card-body">One of the most iconic AK skins ever made. A must-have for any serious collector.</div><div class="price-tag" id="pp1">Loading…</div></div>
+  <div class="card"><span class="badge badge-gold">Contraband</span><div class="card-title">M4A4 | Howl FT</div><div class="card-body">The rarest skin in existence — removed from cases and made Contraband after a DMCA claim.</div><div class="price-tag" id="pp2">Loading…</div></div>
+  <div class="card"><span class="badge badge-red">Covert</span><div class="card-title">AK-47 | Wild Lotus FN</div><div class="card-body">A serene floral design on a deadly rifle. Extremely limited and highly sought after.</div><div class="price-tag" id="pp3">Loading…</div></div>
+  <div class="card"><span class="badge badge-red">Covert</span><div class="card-title">AWP | Gungnir FN</div><div class="card-body">Norse mythology meets CS2. One of the rarest AWP skins with stunning blue metalwork.</div><div class="price-tag" id="pp4">Loading…</div></div>
+  <div class="card"><span class="badge badge-blue">Mil-Spec</span><div class="card-title">AK-47 | Case Hardened FN</div><div class="card-body">The holy grail pattern skin. Blue gem variants can be worth more than almost any other skin.</div><div class="price-tag" id="pp5">Loading…</div></div>
+  <div class="card"><span class="badge badge-purple">Classified</span><div class="card-title">Glock-18 | Fade FN</div><div class="card-body">A beautiful gradient fade from yellow to purple. The most desirable Glock skin by far.</div><div class="price-tag" id="pp6">Loading…</div></div>
+  <div class="card"><span class="badge badge-red">Covert</span><div class="card-title">M4A1-S | Knight FN</div><div class="card-body">Ultra-rare tournament drop skin. Clean white design with extreme scarcity.</div><div class="price-tag" id="pp7">Loading…</div></div>
+  <div class="card"><span class="badge badge-red">Covert</span><div class="card-title">AWP | Medusa FN</div><div class="card-body">Greek mythology artwork covering one of the best AWP canvases in the game.</div><div class="price-tag" id="pp8">Loading…</div></div>
+  <div class="card"><span class="badge badge-purple">Classified</span><div class="card-title">AK-47 | Bloodsport FN</div><div class="card-body">Aggressive red and white racing design. A fan favourite that holds value well.</div><div class="price-tag" id="pp9">Loading…</div></div>
+</div>
+<script>
+var SWAPI_KEY = '9DZOJRT05HNSO16N';
+var SWAPI_URL = 'https://api.steamwebapi.com/steam/api/items?key=' + SWAPI_KEY + '&game=csgo&currency=USD';
+
+var skinMap = {
+  'AWP | Dragon Lore (Field-Tested)':      'pp0',
+  'AK-47 | Fire Serpent (Field-Tested)':   'pp1',
+  'M4A4 | Howl (Field-Tested)':            'pp2',
+  'AK-47 | Wild Lotus (Factory New)':      'pp3',
+  'AWP | Gungnir (Factory New)':           'pp4',
+  'AK-47 | Case Hardened (Factory New)':  'pp5',
+  'Glock-18 | Fade (Factory New)':         'pp6',
+  'M4A1-S | Knight (Factory New)':         'pp7',
+  'AWP | Medusa (Factory New)':            'pp8',
+  'AK-47 | Bloodsport (Factory New)':      'pp9',
+};
+
+async function fetchPrices() {
+  try {
+    var controller = new AbortController();
+    setTimeout(function() { controller.abort(); }, 10000);
+    var res = await fetch(SWAPI_URL, { signal: controller.signal });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    var items = await res.json();
+
+    var lookup = {};
+    items.forEach(function(item) {
+      if (item.markethashname) {
+        lookup[item.markethashname] = item.pricelatest || item.priceavg || item.pricemin || null;
+      }
+    });
+
+    Object.keys(skinMap).forEach(function(name) {
+      var el = document.getElementById(skinMap[name]);
+      if (!el) return;
+      var price = lookup[name];
+      el.textContent = price ? '$' + parseFloat(price).toFixed(2) : '—';
+    });
+
+  } catch(e) {
+    Object.values(skinMap).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = '—';
+    });
+    console.warn('SteamWebAPI fetch failed:', e.message);
+  }
+}
+
+fetchPrices();
+setInterval(fetchPrices, 5 * 60 * 1000);
+</script>
+</div>
+<footer><p class="footer-copy">© 2026 HabibiGamingTV. All rights reserved. Not affiliated with Valve Corporation.</p></footer>
+</body>
+</html>
