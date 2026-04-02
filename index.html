@@ -840,7 +840,16 @@ function setPrice(ids, price) {
     if (!el) return;
     el.classList.remove('loading');
     if (price) {
-      el.textContent = '$' + parseFloat(price).toFixed(2);
+      var newPrice = parseFloat(price);
+      var oldPrice = parseFloat(localStorage.getItem('price_' + id));
+      var arrow = '';
+      if (oldPrice && newPrice !== oldPrice) {
+        arrow = newPrice > oldPrice
+          ? '<span class="t-change up"> ▲</span>'
+          : '<span class="t-change dn"> ▼</span>';
+      }
+      localStorage.setItem('price_' + id, newPrice);
+      el.innerHTML = '$' + newPrice.toFixed(2) + arrow;
       el.style.color = '';
       el.title = '';
     } else {
