@@ -875,7 +875,7 @@ async function fetchPrices() {
     items.forEach(function(item) {
       if (item.market_hash_name) {
         lookup[item.market_hash_name] =
-          item.price_latest ?? item.price_mix ?? item.price_real ?? null
+        ?? null to item.price_real ?? item.price_latest ?? null
       }
     });
 
