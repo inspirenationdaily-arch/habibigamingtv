@@ -258,8 +258,8 @@ a{text-decoration:none;}
 .preview-weapon{font-family:var(--fm);font-size:7px;letter-spacing:0.12em;text-transform:uppercase;color:#5a6478;margin-bottom:2px;}
 .preview-name{font-family:var(--fh);font-size:15px;font-weight:900;letter-spacing:0.03em;text-transform:uppercase;color:#dde2ec;line-height:1;white-space:nowrap;text-overflow:ellipsis;}
 .preview-right{padding:10px 12px;flex-shrink:0;display:flex;align-items:center;gap:6px;}
-.preview-price{font-family:var(--fh);font-size:14px;font-weight:900;background:linear-gradient(90deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;}
-.preview-price.loading{background:none;-webkit-text-fill-color:#3a4155;color:#3a4155;font-size:9px;font-family:var(--fm);animation:pulse 1.5s infinite;}
+.preview-{font-family:var(--fh);font-size:14px;font-weight:900;background:linear-gradient(90deg,var(--fire),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;}
+.preview-.loading{background:none;-webkit-text-fill-color:#3a4155;color:#3a4155;font-size:9px;font-family:var(--fm);animation:pulse 1.5s infinite;}
 .preview-badge{font-family:var(--fm);font-size:6px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:1px 5px;border-radius:2px;color:#000;}
 .preview-cta{text-align:center;}
 .btn-view{font-family:var(--fh);font-size:16px;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;padding:14px 40px;border-radius:4px;border:1px solid rgba(255,92,0,0.35);background:transparent;color:var(--fire);display:inline-block;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;}
@@ -341,7 +341,7 @@ html,body{height:auto !important;overflow-x:hidden;overflow-y:auto !important;}
 </head>
 <body>
 
-<h1 class="seo-h1">Best CS2 Skins 2026 &amp; Live Prices — HabibiGamingTV</h1>
+<h1 class="seo-h1">Best CS2 Skins 2026 &amp; Live s — HabibiGamingTV</h1>
 
 <div class="mob-menu" id="mobMenu">
   <a href="https://www.habibigamingtv.com/" target="_top">Home</a>
@@ -379,8 +379,8 @@ html,body{height:auto !important;overflow-x:hidden;overflow-y:auto !important;}
       <span class="h1-fire">CS2 SKINS</span>
       <span class="h1-solid">2026</span>
     </div>
-    <div class="year-badge">★ Rankings · Prices · Guides · 2026</div>
-    <p class="h-desc">Real loadouts. Real prices. Real opinions. The definitive source for CS2 skin rankings, live market prices and loadout guides — built by an actual player.</p>
+    <div class="year-badge">★ Rankings · s · Guides · 2026</div>
+    <p class="h-desc">Real loadouts. Real s. Real opinions. The definitive source for CS2 skin rankings, live market prices and loadout guides — built by an actual player.</p>
     <div class="cta-row">
       <a href="https://www.habibigamingtv.com/top-10-skins" target="_top" class="btn-main">View Top 10 Skins</a>
       <a href="https://www.habibigamingtv.com/marketplace" target="_top" class="btn-ghost">Browse Marketplace</a>
@@ -875,7 +875,7 @@ async function fetchPrices() {
     items.forEach(function(item) {
       if (item.market_hash_name) {
         lookup[item.market_hash_name] =
-        ?? null to item.price_real ?? item.price_latest ?? null
+      item.price_real !== null && item.price_real !== undefined ? item.price_real : item.price_latest
       }
     });
 
