@@ -37,7 +37,6 @@ exports.handler = async function () {
         market_name: data.marketname || skin,
         price_latest: data.pricelatest ?? null,
         price_real: data.pricereal ?? null,
-        price_mix: data.pricemix ?? null,
         image: data.itemimage || null,
         unstable: data.unstable ?? false
       });
