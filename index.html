@@ -822,20 +822,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowLeft') carrPrev();
 });
 
-// Touch/swipe support
-var touchStartX = 0;
-document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
-document.addEventListener('touchmove', function(e) {
-  var diff = Math.abs(touchStartX - e.changedTouches[0].screenX);
-  if (diff > 10) { e.preventDefault(); }
-}, {passive:false});
-document.addEventListener('touchend', function(e) {
-  var diff = touchStartX - e.changedTouches[0].screenX;
-  if (Math.abs(diff) > 40) { if (diff > 0) carrNext(); else carrPrev(); }
-}, {passive:true});
 
-carrUpdate();
-setInterval(carrNext, 5000);
 
 /* STEAM PRICES via Netlify Function */
 var SWAPI_URL = '/.netlify/functions/steam-prices';
